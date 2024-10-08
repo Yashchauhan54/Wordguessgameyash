@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play the Game</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/style.css}" />
+    <link th:href="@{css/bootstrap.min.css}" rel="stylesheet">
+    <style>
+        /* Custom Styles */
+        .word-inputs {
+            margin-top:35px;
+            display: flex;
+            justify-content: center;
+            gap: 10px; /* Adjust the gap between input fields as needed */
+        }
+
+        .word-inputs input {
+            width: 40px; /* Adjust the width of the input fields */
+            text-align: center;
+            font-size: 1.2rem; /* Adjust the font size for better visibility */
+        }
+    </style>
+</head>
+<body>
+
+<div th:replace="navbar"></div>
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">PLAY THE GAME!</h2>
+
+    <!-- Message Alert -->
+    <p th:if="${message}" th:text="${message}" class="alert alert-danger"></p>
+    <p th:if="${message1}" th:text="${message1}" style="color: green"></p>
+
+    <!-- Word Input Form -->
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <form action="/getWord" method="post" class="mt-4">
+                        <!-- Hints -->
+                        <h4 class="text-center" th:text="${GivenHints}"></h4>
+
+                        <!-- Word Input Fields -->
+                        <div class="mb-3 word-inputs">
+                            <label for="word1" class="form-label">Your Guesses:</label>
+                            <input type="text" id="word1" name="word1" maxlength="1" required>
+                            <input type="text" id="word2" name="word2" maxlength="1" required>
+                            <input type="text" id="word3" name="word3" maxlength="1" required>
+                            <input type="text" id="word4" name="word4" maxlength="1" required>
+                            <input type="text" id="word5" name="word5" maxlength="1" required>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="text-center">
+                            <button type="submit"  class="btn3 btn-primary btn-lg">Submit Your Guesses</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-6 text-center">
+            <img th:src="@{'/' + ${GivenImage}}" class="word_image img-fluid" alt="Word Image" />
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<div th:replace="footer"></div>
+<script th:href="@{js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
